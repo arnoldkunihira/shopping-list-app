@@ -32,7 +32,7 @@ export class ItemService {
         return this.repository.save(item);
     }
 
-    async remove(id: string) {
+    async remove(id: string): Promise<Item> {
         const item = await this.findOne(id);
         return this.repository.remove(item);
     }
