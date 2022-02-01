@@ -18,8 +18,12 @@ export class ItemService {
         return this.repository.find();
     }
 
-    findOne(id: string): Promise<Item> {
-        return this.repository.findOne(id);
+    async findOne(id: string): Promise<Item> {
+        const item = await this.repository.findOne(id);
+        if (!item) {
+            throw new NotFoundException(`Item with id ${id} not found`);
+        }
+        return item;
     }
 
     async update(id: string, updateItemDto: UpdateItemDto): Promise<Item> {
